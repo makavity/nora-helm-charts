@@ -1,0 +1,18 @@
+apiVersion: v2
+name: nora
+description: NORA — a container registry proxy with caching and garbage collection
+type: application
+version: 0.1.0
+appVersion: "0.6.1"
+home: https://github.com/getnora-io/nora
+sources:
+  - https://github.com/getnora-io/nora
+maintainers:
+  - name: getnora-io
+    url: https://github.com/getnora-io
+keywords:
+  - registry
+  - container
+  - proxy
+  - cache
+  - oci

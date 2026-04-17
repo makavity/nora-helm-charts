@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "nora.fullname" . }}-config
+  labels:
+    {{- include "nora.labels" . | nindent 4 }}
+data:
+  config.toml: |
+    [server]
+    host = {{ .Values.config.server.host | quote }}
+    port = {{ .Values.config.server.port | default 4000 }}
+
+    [storage]
+    mode = {{ .Values.config.storage.mode | quote }}
+    path = {{ .Values.config.storage.path | quote }}
+
+    [gc]
+    enabled = {{ .Values.config.gc.enabled }}
+    interval = {{ .Values.config.gc.interval }}
+
+    [retention]
+    enabled = {{ .Values.config.retention.enabled }}
+    interval = {{ .Values.config.retention.interval }}
+    {{- if .Values.config.retention.rules }}
+    {{- range .Values.config.retention.rules }}
+
+    [[retention.rules]]
+    {{- range $k, $v := . }}
+    {{ $k }} = {{ $v | quote }}
+    {{- end }}
+    {{- end }}
+    {{- end }}
